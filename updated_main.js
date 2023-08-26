@@ -1,7 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const skybox = document.getElementById('earth-skybox');
-    skybox.setAttribute('src', 'Earth4096.jpg');
+    skybox.setAttribute('src', 'https://github.com/aARdeLife/earth/blob/4ce21e07738e4aa5cec8ca4dcb5f2d5b2620d336/Earth4096.jpg?raw=true');
     skybox.setAttribute('rotation', '0 180 0');
 
     // Create red pulsating dot
