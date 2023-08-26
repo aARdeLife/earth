@@ -1,17 +1,46 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spinning Earth</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <title>Inverted Earth VR</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.2.0/aframe.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
 </head>
 <body>
-    <a-scene>
-        <a-sky id="earth-skybox"></a-sky>
-        <a-camera></a-camera>
-    </a-scene>
-    <script src="main.js"></script>
+  <a-scene embedded vr-mode-ui="enabled: false">
+    <a-assets>
+      <img id="earthTexture" src="https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73909/world.topo.bathy.200412.3x21600x10800.jpg">
+    </a-assets>
+
+    <a-entity id="cameraRig">
+      <a-camera></a-camera>
+    </a-entity>
+
+    <a-sphere
+      id="invertedEarth"
+      radius="500"
+      scale="-1 1 1"
+      material="src: #earthTexture; side: double;">
+    </a-sphere>
+  </a-scene>
+
+  <script>
+    // Initialize VR
+    const scene = document.querySelector('a-scene');
+    const cameraRig = document.querySelector('#cameraRig');
+
+    scene.addEventListener('enter-vr', function () {
+      cameraRig.setAttribute('position', '0 1.6 0');
+    });
+
+    scene.addEventListener('exit-vr', function () {
+      cameraRig.setAttribute('position', '0 0 0');
+    });
+  </script>
 </body>
 </html>
